@@ -1,0 +1,58 @@
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Icon?
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.directory
+
+# PlatformIO / Arduino build artifacts
+.pio
+.pioenvs
+.piolibdeps
+.clang_complete
+.gcc-flags.json
+build/
+bin/
+*.elf
+*.bin
+*.hex
+*.uf2
+*.map
+
+# Editor / IDE settings
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Logs and temp files
+*.log
+tmp/
+*.tmp
+
+# Python (tooling scripts)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Archives kept in the repo are tracked on purpose; ignore stray ones
+*.7z
+*.rar
