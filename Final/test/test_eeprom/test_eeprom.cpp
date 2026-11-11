@@ -215,14 +215,18 @@ void test_sixteen_bit_no_spill(void) {
 // -------------------------------------------------------------------- main --
 
 int main() {
+  // Because this file supplies its own main(), the Arduino core's main() is
+  // never linked, so init() has to be called by hand. init() configures the
+  // clock prescaler, starts Timer0 and enables global interrupts; without it
+  // millis()/micros()/delay() deadlock and nothing is ever printed.
+  init();
+
   // Must match test_speed in platformio.ini.
   Serial.begin(115200);
 
   // Uploading resets the board; give the test runner time to grab the port
   // before Unity starts printing.
-  delay(3000);
-
-  primeScratch(0xFF);
+  delay(1000);
 
   UNITY_BEGIN();
 
