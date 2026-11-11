@@ -1,79 +1,28 @@
 #ifndef LCD_H
 #define LCD_H
 
-#include <LiquidCrystal.h>
 #include <Arduino.h>
-#include "LiquidCrystal.h"
+#include <LiquidCrystal.h>
 
+// Exact enum required by the project specification (Page 4)
+typedef enum {LEFT, RIGHT, UP, DOWN, SELECT, NONE} Button;
 
-typedef enum {LEFT, RIGHT, UP, DOWN, SELECT, NONE} ButtonType;
-typedef void (*button_press)(ButtonType);
-
-class Button{
+class LCDKeypad : public LiquidCrystal {
   public:
-  Button(unsigned short pin, button_press pressbutton){
-    _pin=pin;
-    _callback = pressbutton;
-    _lastButton =NONE;
-    _lastChangeTime =0;
-  }
-  
-  ButtonType getButtonPress(){
-    int v= analogRead(A0);
-    if(v <50){
-      return RIGHT;
-      
-    }else if(v <250){
-    return UP; 
-         
-    }else if(v <450){
-    return DOWN; 
-         
-    }else if(v <650){
-    return LEFT;
-      
-    }else if(v <250){
-    return SELECT;
-      
-    }else{
-    return NONE;
-    } 
-  }
-  
-  void updateButtonState(){
-    ButtonType currentButton = getButtonPress();
-    const unsigned long debounceDelay = 50;
+    // Constructor: accepts the 6 LCD pins to pass to LiquidCrystal
+    LCDKeypad(uint8_t rs, uint8_t enable, uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7);
 
-    if(currentButton != _lastButton){
-      _lastChangeTime = millis();
-    }
+    // Required public method to read and debounce button presses
+    Button getButtonPress();
 
-    if((millis() - _lastChangeTime) > debounceDelay){
-      if(currentButton != _lastButton){
-        _lastButton = currentButton;
-        if(_callback != NULL){
-          _callback(_lastButton);
-        }
-      }
-    }
-    _lastButton = currentButton;
-  }
-    
   private:
-  unsigned short _pin;
-  button_press _callback;
-  ButtonType _lastButton;
-  unsigned long _lastChangeTime;
-   
+    // Private tracking variables for non-blocking debouncing
+    Button _lastRawReading;
+    Button _confirmedState;
+    unsigned long _lastDebounceTime;
+
+    // Private helper method to map the raw A0 analog reading to a Button enum
+    Button readRawButton();
 };
 
-// helper function for which button was pressed
-Button getButtonPress();
-  
-
-class LCDKeypad : public LiquidCrystal, public Button {
-    public:
-    
-    }
-    };
-#endif 
+#endif
