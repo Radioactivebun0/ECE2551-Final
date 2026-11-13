@@ -1,4 +1,4 @@
-#ifndef BUUZER_H
+#ifndef BUZZER_H
 #define BUZZER_H
 
 #include <Arduino.h>
@@ -22,11 +22,23 @@ class Buzzer {
     }
 
     void bdash(){
-	//tone function for BUZZER_PIN at 830 Hz for 180 ms)
+	    //tone function for BUZZER_PIN at 830 Hz for 180 ms)
     }
 
     void bselect(){
         //tone function for BUZZER_PIN at 1244 Hz for 200 ms)
+    }
+
+    void bmsent(){
+        //tone function for BUZZER_PIN at 988 Hz for 100 ms)
+    }
+
+    void bmfailed(){
+        //tone function for BUZZER_PIN at 740 Hz for 200 ms)
+    }
+
+    void bmrecieved(){
+        //tone function for BUZZER_PIN at 830 Hz for 60 ms)
     }
     private:
     const int BUZZER_PIN;
