@@ -3,25 +3,12 @@
 
 #include <Arduino.h>
 #include <avr/io.h>
-#include <vector>
 
 class EEPROM{
   public:
     EEPROM() {}
 
-    static uint8_t read(uint16_t addr){ // Starting address and how many bytes to return 
-      uint8_t low  = eepromRead(addr);
-      uint8_t high = eepromRead(addr + 1);
-      return (high << 8) | low;
-    }
-
-    static void write(uint16_t addr, uint8_t data){
-      eepromWrite(addr,       data & 0xFF);   // low byte
-      eepromWrite(addr + 1,   data >> 8);     // high byte
-    }
-
-  private:
-    static uint8_t eepromRead(uint16_t address) {
+    static uint8_t Read(uint16_t address) {
       // Wait for EEPROM to finish, EEPE = 1 : Write in progress
       while (EECR & (1 << EEPE))
         ;
@@ -37,7 +24,7 @@ class EEPROM{
     }
 
     // Range from 0-1023 addresses
-    static void eepromWrite(uint16_t address, uint8_t data) {
+    static void Write(uint16_t address, uint8_t data) {
       // Wait for EEPROM to finish, EEPE = 1 : Write in progress
       while (EECR & (1 << EEPE))
         ;
