@@ -1,6 +1,8 @@
 #include "Buzzer.h"
 
-void Buzzer::bscroll(){
+// call these function to get buzzer sounds
+
+void Buzzer::bscroll(){ 
     tone(BUZZER_PIN, 988, 100);
 }
 
