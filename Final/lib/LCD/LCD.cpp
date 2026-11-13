@@ -30,7 +30,7 @@ Button LCDKeypad::readRawButton() {
     } 
   }
 
-Button LCDKeypad::getButtonPress() {
+Button LCDKeypad::getButtonPress() { // call this function to get the current button press returns NONE if no button press
   Button currentButton = readRawButton();
   const unsigned long debounceDelay = 50;
 
