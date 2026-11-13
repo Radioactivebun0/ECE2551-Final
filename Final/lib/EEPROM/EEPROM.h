@@ -3,12 +3,13 @@
 
 #include <Arduino.h>
 #include <avr/io.h>
+#include <vector>
 
 class EEPROM{
   public:
     EEPROM() {}
 
-    static uint8_t read(uint16_t addr){
+    static uint8_t read(uint16_t addr){ // Starting address and how many bytes to return 
       uint8_t low  = eepromRead(addr);
       uint8_t high = eepromRead(addr + 1);
       return (high << 8) | low;
