@@ -11,21 +11,42 @@ using namespace std;
 UIState state = SETUP;
 
 void UI() {
+
+
+    LCDKeypad lcd_keypad(8, 9, 4, 5, 6, 7);
+    lcd_keypad.begin(2, 16);
+
     while (true) {
         switch(state) {
             case SETUP:
                 //SETUP CODE
                 break;
-            case MENU:
+            case MENU: 
                 //SETUP CODE
                 break;
-            case ABOUT_ME:
+            case ABOUT_ME: // do this
+                String name; 
+                String uuid;
+
+                //NEED TO ACQUIRE NAME AND UUID FROM MEMORY CLASS FUNCTIONS
+
+                lcd_keypad.setCursor(0, 0);
+                lcd_keypad.print("Name: ");
+                lcd_keypad.setCursor(0, 6);
+                lcd_keypad.print(name);
+                lcd_keypad.setCursor(1, 0);
+                lcd_keypad.print("UUID: ");
+                lcd_keypad.setCursor(1, 6);
+                lcd_keypad.print(uuid);
+                while(lcd_keypad.getButtonPress() != UP) {
+                    
+                }
+                state = MENU;
+                break;
+            case CONTACTS: //NICK
                 //SETUP CODE
                 break;
-            case CONTACTS:
-                //SETUP CODE
-                break;
-            case NEW_CONTACT:
+            case NEW_CONTACT: // do this
                 //SETUP CODE
                 break;
             case NEW_CONTACT_NAME:
@@ -40,7 +61,7 @@ void UI() {
             case LIST_FULL:
                 //SETUP CODE
                 break;
-            case MESSAGES:
+            case MESSAGES: //NICK
                 //SETUP CODE
                 break;
             case MESSAGE_OPEN:
